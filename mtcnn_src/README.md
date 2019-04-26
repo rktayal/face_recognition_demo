@@ -65,7 +65,10 @@ Once again, we get rid of the boxes with lower confidence levels, and standardiz
 Finally, we run them through the last NMS. At this point, there should only be one bounding box for every face in the image.
 
 Here is how the O-Net structure looks like. It takes R-Net bounding boxes as inputs and marks down the coordinates of facial landmarks.
-![O-Net](./images/onet_arch.png)
+
+
+![O-Net1](./images/onet_arch.png)
+![O-Net2](./images/onet_arch2.png)
 
 It returns three outputs:
 - the probability of a face being in the box
@@ -80,6 +83,8 @@ The final step will be to package all the information into a dictionary with thr
 - `box` contains coorniates for each bounding box
 - `confidence` contains confidence level of the network for each face detected
 - `keypoints` contains the coordinates of each facial landmark (eyes, nose and mouth endpoints) for each face.
+
+`mtcnn.py` implements the above three models i.e `PNet`, `RNet`, `ONet`. You can go through it for better understanding.
 
 To understand more about MTCNN, you can refer here:
 - Github Repo : https://github.com/ipazc/mtcnn
