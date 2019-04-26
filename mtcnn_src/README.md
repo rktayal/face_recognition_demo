@@ -53,6 +53,7 @@ The structure of P-Net looks like this:
 
 convolution 4-2 outputs coordinates of bounding boxes while convolution 4-1 outputs probability of being a face in each bounding box
 
+
 ### Stage 2 (R-Net)
 It takes into account the bounding boxes which are out-of-bounds by performing padding.
 
@@ -91,7 +92,7 @@ It returns three outputs:
 - coordinates of the bounding boxes
 - coordinates of the facial landmarks (eyes, nose and mouth endpoints)
 
-
+##
 The final step will be to package all the information into a dictionary with three keys:
 `box`, `confidence`, and `keypoints`
 
@@ -101,7 +102,7 @@ The final step will be to package all the information into a dictionary with thr
 - `keypoints` contains the coordinates of each facial landmark (eyes, nose and mouth endpoints) for each face.
 
 `mtcnn.py` implements the above three models i.e `PNet`, `RNet`, `ONet`. You can go through it for better understanding.
-
+##
 To understand more about MTCNN, you can refer here:
 - Github Repo : https://github.com/ipazc/mtcnn
 - Research Article :http://arxiv.org/abs/1604.02878
