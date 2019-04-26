@@ -20,8 +20,8 @@ you can install the python package using `pip install <package_name>`
 - Download the MTCNN model from [here] and place it under `mtcnn_model` directory.
 After Download and extracting your directories should look something like this
 ```
-mtcnn_model
-├─ all_in_one
+face_verification_demo
+├─ mtcnn_model
 |   ├─ all_in_one
 │   |   ├─ checkpoint.txt
 │   |   ├─ mtcnn-3000000.data-00000-of-00001
