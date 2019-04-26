@@ -6,13 +6,19 @@ Developed by kpzhang93
 The MTCNN model has three convolutional networks (P-Net, R-Net, O-Net) and is able to outperform other
 face detection algorithms with real time performance.
 Here is how the model architecture looks like:
-![model architecture](./images/model_arch.png)
+
+<p align="center">
+  <img src="./images/model_arch.png">
+ </p>
 
 ## How it works?
 Multiple scaled copies of images are created, called as the image pyramid before passing to the netowork. It is done so
 as to find faces of different sizes (big and small) in the images.
 Below figure depicts the multiple scaled images.
-![pyramid](./images/pyramid.png)
+
+<p align="center">
+  <img src="./images/pyramid.png">
+  </p>
 
 ### Stage 1 (P-Net)
 For each scaled image, a 12x12 kernel convolves over every part of the image, scanning for a face.
@@ -28,7 +34,10 @@ rest are deleted i.e. the ones which the network is not sure to have a face.
 
 NOTE: the coordinates of the bounding boxes (returned by P-Net) needs to be converted to the actual unscaled images.
 Below figure depicts the same.
-![scale](./images/scale.png)
+
+<p align="center">
+  <img src="./images/scale.png">
+  </p>
 
 Next step would be to apply non max supression to eliminate bounding boxes with high confidence and high overlap between them.
 This helps in getting rid of redundant bounding boxes, allowing us to narrow our search down to one accurate box per face.
@@ -37,9 +46,13 @@ The P-Net converts the bounding boxes coordinates to squares by elongating the s
 saved and passed onto next stage. (R-Net)
 
 The structure of P-Net looks like this:
-![P-Net](./images/pnet_arch.png)
+
+<p align="center">
+  <img src="./images/pnet_arch.png">
+</p>
 
 convolution 4-2 outputs coordinates of bounding boxes while convolution 4-1 outputs probability of being a face in each bounding box
+
 
 ### Stage 2 (R-Net)
 It takes into account the bounding boxes which are out-of-bounds by performing padding.
@@ -52,7 +65,10 @@ Since the coordinates of these new bounding boxes are based on the P-Net boundin
 After standardizing the coordinates, we reshape the bounding boxes to a square to be passed on to O-Net.
 
 Here is how R-Net structure looks like. It takes the P-Net bounding boxes as input and refines the coordinates
-![R-Net](./images/rnet_arch.png)
+
+<p align="center">
+  <img src="./images/rnet_arch.png">
+</p>
 
 Similarly, R-Net splits into two layers in the end, giving out two outputs: 
 the coordinates of the new bounding boxes and the confidence level in each bounding box.
@@ -65,14 +81,18 @@ Once again, we get rid of the boxes with lower confidence levels, and standardiz
 Finally, we run them through the last NMS. At this point, there should only be one bounding box for every face in the image.
 
 Here is how the O-Net structure looks like. It takes R-Net bounding boxes as inputs and marks down the coordinates of facial landmarks.
-![O-Net](./images/onet_arch.png)
+
+<p align="center">
+  <img src="./images/onet_arch.png">
+  <img src="./images/onet_arch2.png">
+</p>
 
 It returns three outputs:
 - the probability of a face being in the box
 - coordinates of the bounding boxes
 - coordinates of the facial landmarks (eyes, nose and mouth endpoints)
 
-
+##
 The final step will be to package all the information into a dictionary with three keys:
 `box`, `confidence`, and `keypoints`
 
@@ -81,6 +101,8 @@ The final step will be to package all the information into a dictionary with thr
 - `confidence` contains confidence level of the network for each face detected
 - `keypoints` contains the coordinates of each facial landmark (eyes, nose and mouth endpoints) for each face.
 
+`mtcnn.py` implements the above three models i.e `PNet`, `RNet`, `ONet`. You can go through it for better understanding.
+##
 To understand more about MTCNN, you can refer here:
 - Github Repo : https://github.com/ipazc/mtcnn
 - Research Article :http://arxiv.org/abs/1604.02878
