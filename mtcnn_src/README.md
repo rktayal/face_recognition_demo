@@ -37,6 +37,8 @@ The P-Net converts the bounding boxes coordinates to squares by elongating the s
 saved and passed onto next stage. (R-Net)
 
 The structure of P-Net looks like this:
+
+
 ![P-Net](./images/pnet_arch.png)
 
 convolution 4-2 outputs coordinates of bounding boxes while convolution 4-1 outputs probability of being a face in each bounding box
@@ -52,6 +54,8 @@ Since the coordinates of these new bounding boxes are based on the P-Net boundin
 After standardizing the coordinates, we reshape the bounding boxes to a square to be passed on to O-Net.
 
 Here is how R-Net structure looks like. It takes the P-Net bounding boxes as input and refines the coordinates
+
+
 ![R-Net](./images/rnet_arch.png)
 
 Similarly, R-Net splits into two layers in the end, giving out two outputs: 
@@ -68,6 +72,8 @@ Here is how the O-Net structure looks like. It takes R-Net bounding boxes as inp
 
 
 ![O-Net1](./images/onet_arch.png)
+
+
 ![O-Net2](./images/onet_arch2.png)
 
 It returns three outputs:
