@@ -127,7 +127,7 @@ class MTCNNWrapper:
 
 if __name__ == "__main__":
     obj = MTCNNWrapper()
-    img = cv2.imread('./images/IMG_2691.JPG')
+    img = cv2.imread('./images/IMG_2706.JPG')
     rect, pts = obj.get_result_dict(img)
     print ('rect->', rect)
     print ('pts->', pts)

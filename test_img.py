@@ -139,7 +139,7 @@ def parse_arguments(argv):
                         help='The image path of the testing image')
     parser.add_argument('--model_dir', type=str,
                         help='The directory of trained model',
-                        default='./save_model/all_in_one/')
+                        default='./mtcnn_model/all_in_one/')
     parser.add_argument(
         '--threshold',
         type=float,
