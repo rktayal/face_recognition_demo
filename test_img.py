@@ -109,7 +109,8 @@ def main(args):
                 duration = time.time() - start_time
 
                 print(duration)
-                print(type(rectangles))
+                print('rectangles->', rectangles)
+                print('pts->', points)
                 points = np.transpose(points)
                 for rectangle in rectangles:
                     cv2.putText(img, str(rectangle[4]),
