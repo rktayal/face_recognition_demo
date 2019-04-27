@@ -124,14 +124,17 @@ optional arguments:
                         Whether to save the result image
   --save_name SAVE_NAME
                         If save_image is true, specify the output path.
-						
+```
+```						
 Example: python test_img.py ./images/test.JPG --save_image True
+```
+
 On running the above command you should see a result.JPG file in your working directory being created with bbox around face
 and landmark (eyes, nose & mouth) marked.
 
+
 Therefore MTCNN is used to crop faces from the images, which are further feed to the FaceNet model to create a mapping to a Eucledian
 space from those cropped face images.
-```
 ##
 To understand more about MTCNN, you can refer here:
 - Github Repo : https://github.com/ipazc/mtcnn
