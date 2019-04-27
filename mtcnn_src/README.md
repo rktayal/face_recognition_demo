@@ -102,6 +102,36 @@ The final step will be to package all the information into a dictionary with thr
 - `keypoints` contains the coordinates of each facial landmark (eyes, nose and mouth endpoints) for each face.
 
 `mtcnn.py` implements the above three models i.e `PNet`, `RNet`, `ONet`. You can go through it for better understanding.
+`tools.py` is also a utility script taken from [wangbm git repo](https://github.com/wangbm/MTCNN-Tensorflow) which has methods 
+to detect faces and get the model files.
+`test_img.py` is a test script that takes image and model related parameters as arguments
+and loads the model into memory, runs the inference on that image and returns the dictionary with
+bounding box and landmark detection points along with confidence score. 
+```
+python test_img.py -h
+positional arguments:
+  image_path            The image path of the testing image
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --model_dir MODEL_DIR
+                        The directory of trained model
+  --threshold THRESHOLD THRESHOLD THRESHOLD
+                        Three thresholds for pnet, rnet, onet, respectively.
+  --minsize MINSIZE     The minimum size of face to detect.
+  --factor FACTOR       The scale stride of orginal image
+  --save_image SAVE_IMAGE
+                        Whether to save the result image
+  --save_name SAVE_NAME
+                        If save_image is true, specify the output path.
+						
+Example: python test_img.py ./images/test.JPG --save_image True
+On running the above command you should see a result.JPG file in your working directory being created with bbox around face
+and landmark (eyes, nose & mouth) marked.
+
+Therefore MTCNN is used to crop faces from the images, which are further feed to the FaceNet model to create a mapping to a Eucledian
+space from those cropped face images.
+```
 ##
 To understand more about MTCNN, you can refer here:
 - Github Repo : https://github.com/ipazc/mtcnn
