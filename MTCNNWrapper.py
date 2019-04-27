@@ -34,7 +34,7 @@ import numpy as np
 import tensorflow as tf
 
 from mtcnn_src.mtcnn import PNet, RNet, ONet
-from tools import detect_face, get_model_filenames
+from mtcnn_src.tools import detect_face, get_model_filenames
 
 class MTCNNWrapper:
     def __init__(self):
