@@ -55,7 +55,7 @@ face similarity. Therefore similar face images will have lesser distance between
 Eucledian embedding per image using the deep convolutional network (FaceNet), 
 tasks such as face recognition, clustering & verification can easily be implemented.
 <p align="center">
-	<img src="./images/facenet_arch.png">
+	<img src="./mtcnn_src/images/facenet_arch.png">
 </p>
 
 The advantage of using the 128D embedding is that you don't need to retrain you model to recoginize new faces.
@@ -67,7 +67,7 @@ FaceNet uses a distinct loss method called Triplet Loss to calculate loss.
 Triplet Loss minimises the distance between an anchor and a positive, 
 images that contain same identity, and maximises the distance between the anchor and a negative, images that contain different identities.
 <p align="center">
-	<img src="./images/triplet_loss.png">
+	<img src="./mtcnn_src/images/triplet_loss.png">
 </p>
 
 Conceptually it means, Faces of same identity should appear closer to each other than faces of another identity.
@@ -75,26 +75,25 @@ Conceptually it means, Faces of same identity should appear closer to each other
 ### 1. Database
 Here is what the `images` directory looks like:
 <p align="center">
-	<img src="./images/database.png">
+	<img src="./mtcnn_src/images/database.png">
 </p>
+
 Database has several images of my friends, for which we will generate the 128D embedding and dump it in a pickle file.
+
+
 Simply add your own set of images to `./images` directory for performing facial recognition on your own set of images.
+
 
 In my implementation, I have used tensorflow. Additionally I am using utility file `facenet.py` to abstract all interactions with 
 FaceNet network. The file is responsible for loading the network and have api's to perform inference.
 
-`faces` is a list of dictioniary. Its output structure would look like:
-```
-faces [{'rect': [357, 129, 479, 315], 'embedding': array([[-8.19484070e-02, -2.21129805e-02, -1.30576044e-01,
-		 6.40663598e-03, -1.72499865e-02, -2.30523646e-02,
-         4.76869754e-02,  7.95004666e-02,  5.91421779e-03,
-         1.85606722e-02,  6.09219307e-04,  2.72919453e-04,
-		 .
-		 .
-		 .
-		 -8.93132612e-02, -1.93766430e-02]], dtype=float32), 'name': 'Akansha'}]
-```
 
 ## References
 - MTCNN paper link: [Joint Face Detection and Alignment using Multi-task Cascaded Convolutional Networks](https://arxiv.org/pdf/1604.02878v1.pdf)
 - MTCNN Web Link: https://kpzhang93.github.io/MTCNN_face_detection_alignment/index.html
+- https://github.com/wangbm/MTCNN-Tensorflow
+- https://github.com/davidsandberg/facenet
+- https://github.com/amenglong/face_recognition_cnn
+- https://hackernoon.com/building-a-facial-recognition-pipeline-with-deep-learning-in-tensorflow-66e7645015b8
+- https://towardsdatascience.com/deep-learning-4-embedding-layers-f9a02d55ac12
+- https://medium.freecodecamp.org/making-your-own-face-recognition-system-29a8e728107c

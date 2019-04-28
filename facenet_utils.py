@@ -22,7 +22,7 @@ from scipy.optimize import brentq
 import facenet
 from MTCNNWrapper import MTCNNWrapper
 
-class FaceVerify:
+class FaceUtil:
     
     def __init__(self, data_path='images', model_dir='model/20180402-114759'):
         self.data_path = data_path
@@ -37,16 +37,6 @@ class FaceVerify:
         self.detect_multiple_faces = False
 
 
-    def store_data(self, encodings):
-        with open('dbfile', 'wb') as f:
-            pickle.dump(encodings, f)
-
-    def load_data(self):
-        if os.path.exists('dbfile'):
-            dbfile = open('dbfile', 'rb')
-            db = pickle.load(dbfile)
-            return db
-        return None
 
     def convert_to_embedding(self, single=False, img_path=None):
         extracted = []
@@ -70,8 +60,7 @@ class FaceVerify:
                             bounding_boxes, points = self.mtcnn.get_result_dict(image=img)
                             faces = self.get_faces(img, bounding_boxes, points, filename)
                             extracted.append(faces)
-                        self.store_data(extracted)
-                        return None
+                        return extracted
                     else:
                         img = cv2.imread(img_path, 1)
                         bounding_boxes, points = self.mtcnn.get_result_dict(image=img)
@@ -81,8 +70,8 @@ class FaceVerify:
     def get_faces(self, img, bounding_boxes, points, filename):
         faces = []
         nrof_faces = bounding_boxes.shape[0]
-        print ('bounding_boxes.shape', bounding_boxes.shape[0])
-        print("No. of faces detected: {}".format(nrof_faces))
+        #print ('bounding_boxes.shape', bounding_boxes.shape[0])
+        #print("No. of faces detected: {}".format(nrof_faces))
 
         if nrof_faces>0:
             det = bounding_boxes[:,0:4]
@@ -123,27 +112,34 @@ class FaceVerify:
         return feature_vector
 
     
-    def ecuclidean_distance(self, emb_list, embedding):
+    def get_eucledian_dist_list(self, emb_list, embedding):
+        dist_list = []
         for emb in emb_list:
             dist = np.sqrt(np.sum(np.square(np.subtract(emb[0]['embedding'], embedding[0]['embedding']))))
             print(emb[0]['name'])
             print('  %1.4f  ' % dist, end='')
             print("\n")
+            dist_list.append([emb[0]['name'], dist])
+        return dist_list
+
+    def get_eucledian_dist(self, enc1, enc2):
+        dist = np.sqrt(np.sum(np.square(np.subtract(enc1[0]['embedding'], enc2[0]['embedding']))))
+        return dist
 
 
 if __name__ == '__main__':
-    face_verify = FaceVerify()
+    face_util = FaceUtil()
 
     # if pickle file does not exists, generate it
     if not os.path.exists('dbfile'):
-        encodings = face_verify.convert_to_embedding()
+        encodings = face_util.convert_to_embedding()
 
     # read the pickle file
-    encodings_list = face_verify.load_data()
+    encodings_list = face_util.load_data()
 
-    embedding = face_verify.convert_to_embedding(single=True, img_path='akansha2.JPG')
-    encodings_list = face_verify.load_data()
+    embedding = face_util.convert_to_embedding(single=True, img_path='sarah.JPG')
+    encodings_list = face_util.load_data()
 
-    face_verify.ecuclidean_distance(encodings_list, embedding)
+    face_util.get_eucledian_dist_list(encodings_list, embedding)
 
     
