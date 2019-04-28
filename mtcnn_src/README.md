@@ -134,7 +134,8 @@ and landmark (eyes, nose & mouth) marked.
 
 
 Therefore MTCNN is used to crop faces from the images, which are further feed to the FaceNet model to create a mapping to a Eucledian
-space from those cropped face images.
+space from those cropped face images.<br />
+Now you can [go back to previous section](../README.md) to understand the FaceNet network.
 ##
 To understand more about MTCNN, you can refer here:
 - Github Repo : https://github.com/ipazc/mtcnn
