@@ -21,8 +21,10 @@ I came across FaceNet network, which performs the task of face recognition, veri
 hands on this fancy stuff as well.
 
 ## Model Download (pretrained)
+- Download the MTCNN model from [here](https://github.com/wangbm/MTCNN-Tensorflow/tree/master/save_model) and place it under `mtcnn_model` directory.<br />
+NOTE: The MTCNN models have already been checked in the repo, so you will see the related files under `mtcnn_model/` directory
+but you are free to change or replace it with your own custom models.
 - Download facenet model from [here](https://drive.google.com/file/d/1EXPBSXwTaqrSC0OhUdXNmKSh9qJUQ55-/view) and copy to `model` directory
-- Download the MTCNN model from [here] and place it under `mtcnn_model` directory.
 After Download and extracting your directories should look something like this
 ```
 face_verification_demo
