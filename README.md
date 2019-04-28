@@ -78,15 +78,21 @@ Here is what the `images` directory looks like:
 	<img src="./mtcnn_src/images/database.png">
 </p>
 
-Database has several images of my friends, for which we will generate the 128D embedding and dump it in a pickle file.
+Database has several images of persons, for which we will generate the 128D embedding( or feature vector) and will get the 
+eculedian distance of test image with each of the previously created embedding. If the distance is less than a certain 
+threshold, meaning images are from a same person.
+NOTE: To avoid generating the embeddings every time we execute the `test_script.py` we will dump the embeddings in a pickle
+file & then reuse it for further references.
+If you want to run on your own set of images, simply add your own images to `images` directory.
 
 
-Simply add your own set of images to `./images` directory for performing facial recognition on your own set of images.
-
-
-In my implementation, I have used tensorflow. Additionally I am using utility file `facenet.py` to abstract all interactions with 
-FaceNet network. The file is responsible for loading the network and have api's to perform inference.
-
+In my implementation, I have used tensorflow. Additionally I have written `facenet_utils.py` that interacts with `facenet.py`
+and `MTCNNWrapper.py` to abstract all interactions with both the networks (MTCNN & FaceNet). 
+It also has utility methods to return the 128D feature vector.
+Visual Representaion as to what script `test_img.py` is doing is as follows:
+<p align="center">
+	<img src="./mtcnn_src/images/visual.png">
+</p>
 
 ## References
 - MTCNN paper link: [Joint Face Detection and Alignment using Multi-task Cascaded Convolutional Networks](https://arxiv.org/pdf/1604.02878v1.pdf)
