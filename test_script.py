@@ -56,7 +56,7 @@ def who_it_is(img_path):
 
 if __name__ == "__main__":
 
-    verify('./images/Roark.jpg', 'test.jpg')
-    #who_it_is('test.jpg')
+    #verify('./images/Roark.jpg', 'test.jpg')
+    who_it_is('test.jpg')
 
 

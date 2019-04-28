@@ -116,9 +116,9 @@ class FaceUtil:
         dist_list = []
         for emb in emb_list:
             dist = np.sqrt(np.sum(np.square(np.subtract(emb[0]['embedding'], embedding[0]['embedding']))))
-            print('distance from {}'.format(emb[0]['name'].split('.')[0]))
-            print('  %1.4f  ' % dist, end='')
-            print("\n")
+            #print('distance from {}'.format(emb[0]['name'].split('.')[0]))
+            #print('  %1.4f  ' % dist, end='')
+            #print("\n")
             dist_list.append([emb[0]['name'], dist])
         return dist_list
 

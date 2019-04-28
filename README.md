@@ -81,17 +81,40 @@ Here is what the `images` directory looks like:
 Database has several images of persons, for which we will generate the 128D embedding( or feature vector) and will get the 
 eculedian distance of test image with each of the previously created embedding. If the distance is less than a certain 
 threshold, meaning images are from a same person.
+
+
 NOTE: To avoid generating the embeddings every time we execute the `test_script.py` we will dump the embeddings in a pickle
 file & then reuse it for further references.
-If you want to run on your own set of images, simply add your own images to `images` directory.
 
+
+If you want to run on your own set of images, simply add your own images to `images` directory.
 
 In my implementation, I have used tensorflow. Additionally I have written `facenet_utils.py` that interacts with `facenet.py`
 and `MTCNNWrapper.py` to abstract all interactions with both the networks (MTCNN & FaceNet). 
 It also has utility methods to return the 128D feature vector.
+```
+ # create database pickle file, if not exists
+    if not os.path.exists('dbfile'):
+        encodings = face_util.convert_to_embedding()
+        store_data(encodings)
+
+    # read the pickle file
+    enc_list = load_data()
+```
+Above code will generate the 128D feature vector for all the images in the `images` directory.
+if `dbfile` exists in the same working directory, then it will load the embeddings from there. <br />
+NOTE: if you have added images into the `images` directory, make sure to delete the `dbfile` and then re-run the script.
+
+
 Visual Representaion as to what script `test_img.py` is doing is as follows:
 <p align="center">
 	<img src="./mtcnn_src/images/visual.png">
+</p>
+
+## Results
+Below are the test results: <br />
+<p align="center">
+	<img src="./mtcnn_src/images/result.png">
 </p>
 
 ## References
